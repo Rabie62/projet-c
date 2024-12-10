@@ -35,7 +35,7 @@ void afficherMenu(Plat menu[], int taille_menu);
 int rechercherPlat(Plat menu[], int taille_menu, char *nom);
 void ajouterCommande(FileCommande* file, char* nom_client, int telephone, Plat plats[], int nb_plats, int reference);
 void enregistrerCommandesDansFichier(FileCommande* file);
-void libererFileCommandes(FileCommande* file);
+void afficherCommandes(FileCommande* file);
 float calculerPrixTotal(Plat plats[], int nb_plats);
 
 int main() {
@@ -68,6 +68,7 @@ int main() {
         printf("4. pour rechercher un plat \n ");
         printf("5. pour ajouter une commande \n ");
         printf("6. pour enregistrer les commandes dans un fichier \n ");
+        printf("7. pour afficher les commandes \n ");
         printf("0. pour quitter \n ");
         printf("entrer votre choix: ");
         scanf("%i", &choix);
@@ -141,6 +142,10 @@ int main() {
 
             case 6:
                 enregistrerCommandesDansFichier(&fileCommandes);
+                break;
+
+            case 7:
+                afficherCommandes(&fileCommandes);
                 break;
 
             case 0:
@@ -245,5 +250,19 @@ void enregistrerCommandesDansFichier(FileCommande* file) {
         temp = temp->suivant;
     }
     fclose(fichier);
+}
+
+void afficherCommandes(FileCommande* file) {
+
+    NodeCommande* temp = file->tete;
+    while (temp != NULL) {
+        printf( "Reference de la commande: %d\n", temp->commande.reference);
+        printf( "Commande pour %s (Telephone: %d):\n", temp->commande.nom_client, temp->commande.telephone);
+        for (int i = 0; i < temp->commande.nb_plats; i++) {
+            printf( "  %d. %s - %.2f TND\n", i + 1, temp->commande.plats[i].nom, temp->commande.plats[i].prix);
+        }
+        printf("Prix total a payer: %.2f TND\n\n", temp->commande.prix_total);
+        temp = temp->suivant;
+    }
 }
 
