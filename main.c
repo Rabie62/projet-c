@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX_SIZE 20
+#define MAX_SIZE 30
 #define FILENAME "commandes.txt"
 
 typedef struct {
@@ -115,7 +115,7 @@ int main() {
                 printf("donner le nombre de plats: ");
                 scanf("%i", &nb_plats);
                 if (nb_plats > MAX_SIZE) {
-                    printf("Nombre de plats trop élevé. Limité à %d.\n", MAX_SIZE);
+                    printf("Nombre de plats trop Ã©levÃ©. LimitÃ© Ã  %d.\n", MAX_SIZE);
                     nb_plats = MAX_SIZE;
                 }
                 printf("donner la reference: ");
@@ -130,7 +130,7 @@ int main() {
                     plat[strcspn(plat, "\n")] = '\0';
                     int index = rechercherPlat(menu, taille_menu, plat);
                     if (index == -1) {
-                        printf("Plat non trouvé dans le menu.\n");
+                        printf("Plat non trouvÃ© dans le menu.\n");
                         break;
                     }
                     plats_commande[i] = menu[index];
@@ -173,7 +173,7 @@ void supprimerPlatDuMenu(Plat menu[], int *taille_menu, char *nom) {
         (*taille_menu)--;
     }
     else {
-        printf("Plat non trouvé dans le menu.\n");
+        printf("Plat non trouvÃ© dans le menu.\n");
     }
 }
 
